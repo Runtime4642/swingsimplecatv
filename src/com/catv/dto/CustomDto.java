@@ -1,6 +1,6 @@
-package com.catv.vo;
+package com.catv.dto;
 
-public class CustomVo {
+public class CustomDto {
 	private int no;
 	private String name;
 	private int phone1;
@@ -15,9 +15,13 @@ public class CustomVo {
 	private int tv_count;
 	private int pay_amount;
 	private int res_no;
+	private String res_name;
 	private int bank_no;
+	private String bank_name;
 	private int collect_money_method_no;
+	private String collect_money_method_name;
 	private int state_no;
+	private String state_name;
 	private String memo;
 	public int getNo() {
 		return no;
@@ -61,13 +65,7 @@ public class CustomVo {
 	public void setPost_postion(String post_postion) {
 		this.post_postion = post_postion;
 	}
-	
-	public String getAccount_num() {
-		return account_num;
-	}
-	public void setAccount_num(String account_num) {
-		this.account_num = account_num;
-	}
+
 	public int getMouth_price() {
 		return mouth_price;
 	}
@@ -122,12 +120,43 @@ public class CustomVo {
 	public void setState_no(int state_no) {
 		this.state_no = state_no;
 	}
+	public String getAccount_num() {
+		return account_num;
+	}
+	public void setAccount_num(String account_num) {
+		this.account_num = account_num;
+	}
+	public String getRes_name() {
+		return res_name;
+	}
+	public void setRes_name(String res_name) {
+		this.res_name = res_name;
+	}
+	public String getBank_name() {
+		return bank_name;
+	}
+	public void setBank_name(String bank_name) {
+		this.bank_name = bank_name;
+	}
+	public String getCollect_money_method_name() {
+		return collect_money_method_name;
+	}
+	public void setCollect_money_method_name(String collect_money_method_name) {
+		this.collect_money_method_name = collect_money_method_name;
+	}
+	public String getState_name() {
+		return state_name;
+	}
+	public void setState_name(String state_name) {
+		this.state_name = state_name;
+	}
 	public String getMemo() {
 		return memo;
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+
 	
 	
 
