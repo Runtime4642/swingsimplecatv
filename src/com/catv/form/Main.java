@@ -9,11 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.catv.form.custom.Custom;
+
 public class Main extends JFrame implements ActionListener{
 	
 	private JButton printButton;
 	private JButton customButton;
-	@Override	
+	@Override 	
 	public void actionPerformed(ActionEvent ac) {
 		Object obj = ac.getSource();
 		if((JButton)obj == printButton) {
@@ -38,8 +40,8 @@ public class Main extends JFrame implements ActionListener{
 		JPanel panel = new JPanel(new FlowLayout());
 		printButton = new JButton("프린터출력");
 		customButton = new JButton("고객관리");
-		panel.add(printButton);
 		panel.add(customButton);
+		panel.add(printButton);
 		getContentPane().add(panel);
 		printButton.addActionListener(this);
 		customButton.addActionListener(this);

@@ -7,7 +7,7 @@ public class CustomVo {
 	private int phone2;
 	private String address;
 	private int post_num;
-	private String post_postion;
+	private String account_name;
 	private String account_num;
 	private int mouth_price;
 	private String last_collect_date;
@@ -55,13 +55,14 @@ public class CustomVo {
 	public void setPost_num(int post_num) {
 		this.post_num = post_num;
 	}
-	public String getPost_postion() {
-		return post_postion;
-	}
-	public void setPost_postion(String post_postion) {
-		this.post_postion = post_postion;
-	}
+
 	
+	public String getAccount_name() {
+		return account_name;
+	}
+	public void setAccount_name(String account_name) {
+		this.account_name = account_name;
+	}
 	public String getAccount_num() {
 		return account_num;
 	}
