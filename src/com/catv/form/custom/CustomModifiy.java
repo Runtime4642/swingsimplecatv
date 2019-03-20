@@ -3,25 +3,29 @@ package com.catv.form.custom;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 import com.cate.controller.CustomController;
 import com.catv.dto.CustomComboDto;
-import com.catv.dto.CustomDto;
+import com.catv.vo.CustomVo;
 
-public class CustomInsert extends JFrame implements ActionListener {
-
+public class CustomModifiy extends JFrame implements ActionListener{
 	private JButton saveButton;
 	private JButton cancleButton;
 	private JTextField tfName;
@@ -34,32 +38,41 @@ public class CustomInsert extends JFrame implements ActionListener {
 	private JTextField tfMemo;
 	private JTextField tfAccountName;
 	private JTextField tfAccountNum;
+	private JFormattedTextField tfLastCollectDay;
 	private JComboBox cbResudent;
 	private JComboBox cbArea;
 	private JComboBox cbMethod; 
 	private JComboBox cbBank;
+	private JComboBox cbState;
+	private JLabel lNo;
 	
 	private CustomController c = new CustomController();
 	@Override
 	public void actionPerformed(ActionEvent ac) {
 		Object obj = ac.getSource();
 		if ((JButton) obj == saveButton) {
-			CustomDto dto = new CustomDto();
-			dto.setName(tfName.getText());
-			dto.setInstall_date(tfInstallDay.getText());
-			dto.setRes_type(cbResudent.getSelectedItem().toString());
-			dto.setPhone1(tfPhone1.getText());
-			dto.setPhone2(tfPhone2.getText());
-			dto.setArea_name(cbArea.getSelectedItem().toString());
-			dto.setAddress(tfAddress.getText());
-			dto.setMemo(tfMemo.getText());
-			dto.setCollect_money_method_name(cbMethod.getSelectedItem().toString());
-			dto.setBank_name(cbBank.getSelectedItem().toString());
-			dto.setAccount_name(tfAccountName.getText());
-			dto.setAccount_num(tfAccountNum.getText());
-			dto.setTv_count(Integer.parseInt(tftvCount.getText()));
-			dto.setMouth_price(Integer.parseInt(tfPrice.getText()));
-			if(c.insertDataByDto(dto))
+			CustomVo vo =new CustomVo();
+			vo.setNo(Integer.parseInt(lNo.getText().substring(5)));
+			vo.setName(tfName.getText());
+			vo.setInstall_date(tfInstallDay.getText());
+			vo.setPhone1(tfPhone1.getText());
+			vo.setPhone2(tfPhone2.getText());
+			vo.setAddress(tfAddress.getText());
+			vo.setMemo(tfMemo.getText());
+			vo.setAccount_name(tfAccountName.getText());
+			vo.setAccount_num(tfAccountNum.getText());
+			vo.setTv_count(Integer.parseInt(tftvCount.getText()));
+			vo.setMouth_price(Integer.parseInt(tfPrice.getText()));
+			vo.setLast_collect_date(tfLastCollectDay.getText());
+			vo.setState_no(cbState.getSelectedIndex()+1);
+			vo.setRes_no(cbResudent.getSelectedIndex()+1);
+			if(cbArea.getSelectedIndex()==9)
+			vo.setArea_no(cbArea.getSelectedIndex()+11);
+			else
+				vo.setArea_no(cbArea.getSelectedIndex()+10);
+			vo.setCollect_money_method_no(cbMethod.getSelectedIndex()+1);
+			vo.setBank_no(cbBank.getSelectedIndex()+1);
+			if(c.modifiy(vo))
 				JOptionPane.showMessageDialog(null, "입력성공");
 			else
 				JOptionPane.showMessageDialog(null, "입력실패");
@@ -69,18 +82,32 @@ public class CustomInsert extends JFrame implements ActionListener {
 		}
 	}
 
-	public CustomInsert(CustomComboDto dto) {
-
+	public CustomModifiy(CustomComboDto dto,int no) {
+		
 		setSize(1700, 1000);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
+		
+		
 		Font font = new Font("arian", Font.BOLD, 30);
 		// 신규 panel
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
-		panel1.setBorder(new TitledBorder("신규"));
+		panel1.setBorder(new TitledBorder("수정"));
 		// 신규 1층 panel
 		JPanel panel1_1 = new JPanel(new FlowLayout());
+		
+		String[] list = new String[dto.getState().size()];
+		for (int i = 0; i < dto.getState().size(); i++) {
+			list[i] = dto.getState().get(i);
+		}
+		cbState = new JComboBox(list);
+		cbState.setFont(font);
+		panel1_1.add(cbState);
+		 lNo = new JLabel("");
+		lNo.setForeground(new java.awt.Color(255, 51, 51));
+		lNo.setFont(font);
+		panel1_1.add(lNo);
 		// 이름 panel
 		JPanel pName = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 20));
 		JLabel lName = new JLabel("고객명");
@@ -104,7 +131,7 @@ public class CustomInsert extends JFrame implements ActionListener {
 		JPanel pResudent = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 20));
 		JLabel lResudent = new JLabel("거주구분");
 		lResudent.setFont(font);
-		String[] list = new String[dto.getResudent().size()];
+		list = new String[dto.getResudent().size()];
 		for (int i = 0; i < dto.getResudent().size(); i++) {
 			list[i] = dto.getResudent().get(i);
 		}
@@ -260,19 +287,59 @@ public class CustomInsert extends JFrame implements ActionListener {
 		pPrice.add(tfPrice);
 		panel1_6.add(pPrice);
 
+		// 최종납입일 panel
+		JPanel pLastCollectDay = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 20));
+		JLabel lLastCollectDay = new JLabel("최종납입일");
+		lLastCollectDay.setFont(font);
+		tfLastCollectDay = new JFormattedTextField();
+		try {
+			tfLastCollectDay.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("####.##")));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tfLastCollectDay.setFont(font);
+		pLastCollectDay.add(lLastCollectDay);
+		pLastCollectDay.add(tfLastCollectDay);
+		panel1_6.add(pLastCollectDay);
+		
 		panel1.add(panel1_6);
 
 		// 작업 panel
 		JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 20));
 		panel2.setBorder(new TitledBorder("작업"));
 		saveButton = new JButton("저장");
+		saveButton.setFont(font);
 		cancleButton = new JButton("취소");
+		cancleButton.setFont(font);
 		saveButton.addActionListener(this);
 		cancleButton.addActionListener(this);
 		panel2.add(saveButton);
 		panel2.add(cancleButton);
 		getContentPane().add(panel1, BorderLayout.CENTER);
 		getContentPane().add(panel2, BorderLayout.SOUTH);
+		
+		//데이터 채우기
+		CustomVo vo = c.getCustomByNo(no);
+		lNo.setText("고객번호:"+Integer.toString(vo.getNo()));
+		tfName.setText(vo.getName());
+		tfInstallDay.setText(vo.getInstall_date());
+		cbResudent.setSelectedIndex(vo.getRes_no()-1);
+		tfPhone1.setText(vo.getPhone1());
+		tfPhone2.setText(vo.getPhone2());
+		if(vo.getArea_no()!=20)
+		cbArea.setSelectedIndex(vo.getArea_no()-10);
+		else
+			cbArea.setSelectedIndex(vo.getArea_no()-11);
+		tfAddress.setText(vo.getAddress());
+		tfMemo.setText(vo.getMemo());
+		cbMethod.setSelectedIndex(vo.getCollect_money_method_no()-1);
+		cbBank.setSelectedIndex(vo.getBank_no()-1);
+		tfAccountName.setText(vo.getAccount_name());
+		tfAccountNum.setText(vo.getAccount_num());
+		tftvCount.setText(Integer.toString(vo.getTv_count()));
+		tfPrice.setText(Integer.toString(vo.getMouth_price()));
+		cbState.setSelectedIndex(vo.getState_no()-1);
+		tfLastCollectDay.setText(vo.getLast_collect_date());
 	}
-
 }

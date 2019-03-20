@@ -3,8 +3,8 @@ package com.catv.vo;
 public class CustomVo {
 	private int no;
 	private String name;
-	private int phone1;
-	private int phone2;
+	private String phone1;
+	private String phone2;
 	private String address;
 	private int post_num;
 	private String account_name;
@@ -19,6 +19,20 @@ public class CustomVo {
 	private int collect_money_method_no;
 	private int state_no;
 	private String memo;
+	private int receive_money;
+	private int area_no;
+	public int getArea_no() {
+		return area_no;
+	}
+	public void setArea_no(int area_no) {
+		this.area_no = area_no;
+	}
+	public int getReceive_money() {
+		return receive_money;
+	}
+	public void setReceive_money(int receive_money) {
+		this.receive_money = receive_money;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -31,16 +45,17 @@ public class CustomVo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPhone1() {
+
+	public String getPhone1() {
 		return phone1;
 	}
-	public void setPhone1(int phone1) {
+	public void setPhone1(String phone1) {
 		this.phone1 = phone1;
 	}
-	public int getPhone2() {
+	public String getPhone2() {
 		return phone2;
 	}
-	public void setPhone2(int phone2) {
+	public void setPhone2(String phone2) {
 		this.phone2 = phone2;
 	}
 	public String getAddress() {

@@ -49,6 +49,7 @@ public class Custom extends JFrame implements ActionListener {
 		getContentPane().add(panel);
 		신규고객추가버튼.addActionListener(this);
 		데이터등록버튼.addActionListener(this);
+		고객정보수정버튼.addActionListener(this);
 //		customButton.addActionListener(this);
 	}
 
@@ -65,6 +66,8 @@ public class Custom extends JFrame implements ActionListener {
 				readData("/1234.txt");
 
 			}
+		} else if((JButton) obj == 고객정보수정버튼) {
+			new CustomSearch().setVisible(true);
 		}
 	}
 
@@ -99,7 +102,7 @@ public class Custom extends JFrame implements ActionListener {
 				dto.setPhone1(b[3]);
 				dto.setPhone2(b[4]);
 				dto.setRes_type(b[5]);
-				if(b[6]!=null || !b[6].equals(""))
+				if(b[6]==null || b[6].equals(""))
 					dto.setArea_no(20);
 				else
 					dto.setArea_no(Integer.parseInt(b[6]));

@@ -1,0 +1,31 @@
+insert into area values(12,"하동군 화개면 삼신리",667820);
+insert into area values(13,"하동군 화개면 운수리",667820);
+insert into area values(14,"하동군 화개면 용강리",667820);
+insert into area values(15,"하동군 화개면 덕은리",667820);
+insert into area values(16,"하동군 화개면 부춘리",667820);
+insert into area values(17,"하동군 화개면 범왕리",667820);
+insert into area values(18,"하동군 화개면 대성리",667820);
+insert into area values(20,"기타",667820);
+
+
+desc custom;
+select * from resudent;
+select * from bank;
+select * from collectmoneymethod;
+select * from state;
+select * from custom;
+select * from area;
+delete from custom;
+delete from bank where no=4;
+select * from custom where no=1;
+
+select * from custom;
+select * from custom where no=351;
+select * from custom where no=2033;
+select count(*) from custom;
+
+select * from custom where name like '%복%';
+select no,name,phone1,phone2,address,account_name,account_num,receive_money,last_collect_day from custom where phone1 like '%010%' or phone2 like '%011%';
+
+select * from custom where name="강 지산";
+select * from custom;
