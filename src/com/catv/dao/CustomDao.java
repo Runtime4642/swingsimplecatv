@@ -148,7 +148,7 @@ public class CustomDao extends Dao {
 			System.out.println(list.get(m).getNo());
 			conn=getConnection();
 			//                                            이름  전화1 전화2 주소   계좌명 계좌번호    월관리비   마지막납부일     가설일   티비수 총납부금액   거주구분   은행   수금방법   상태       메모 미수금     지역
-			String sql = "insert into custom values(? , ? , ? , ? , ? , ? ,   ? ,   ? ,    ? ,       ? ,   ? , 0      ,?,     ?,  ? ,   ?   , ? ,  ? ,  ?  )";
+			String sql = "insert into custom values(? , ? , ? , ? , ? , ? ,   ? ,   ? ,    ? ,       ? ,   ? , 0      ,?,     ?,  ? ,   ?   , ? ,  ? ,  ?  ,current_date())";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,list.get(m).getNo());
@@ -296,7 +296,7 @@ public class CustomDao extends Dao {
 
 			
 			//                                번호    이름  전화1 전화2 주소   계좌명 계좌번호    월관리비   마지막납부일                                       가설일         티비수 총납부금액   거주구분   은행   수금방법   상태       메모 미수금     지역
-			 sql = "insert into custom values(null , ? , ? , ? , ? , ? ,   ? ,   ? , ? ,  current_date() ,   ? , 0      ,?,     ?,  ? ,   1   , ? ,  ? ,  ?  )";
+			 sql = "insert into custom values(null , ? , ? , ? , ? , ? ,   ? ,   ? , ? ,  current_date() ,   ? , 0      ,?,     ?,  ? ,   1   , ? ,  ? ,  ?  ,current_date())";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -621,5 +621,103 @@ public class CustomDao extends Dao {
 		}
 
 		return list;
+	}
+
+	
+	//자동이체 리스트겟
+	public List<CustomVo> getAutoList(){
+		List<CustomVo> list = new ArrayList<CustomVo>();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnection();
+			String sql = "select a.no,a.name,a.month_price,a.tv_count,a.last_collect_day,a.receive_money,a.account_num from custom a,collectmoneymethod b where a.collect_money_method_no=b.no and b.name='자동이체'; ";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+			
+				int no = rs.getInt(1);
+				String name = rs.getString(2);
+				int month_price = rs.getInt(3);
+				int tv_count = rs.getInt(4);
+				String last_collect_day = rs.getString(5);
+				int receive_money = rs.getInt(6);
+				String account_num = rs.getString(7);
+				
+				CustomVo vo = new CustomVo();
+				vo.setNo(no);
+				vo.setName(name);
+				vo.setMouth_price(month_price);
+				vo.setTv_count(tv_count);
+				vo.setLast_collect_date(last_collect_day);
+				vo.setReceive_money(receive_money);
+				vo.setAccount_num(account_num);
+				list.add(vo);
+			}
+			return list;
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		return list;
+	}
+	
+	public boolean updateRenew(List<Integer> list) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		
+		try {
+			for(int i=0;i<list.size();i++) {
+			conn = getConnection();
+
+			String sql = 
+					"update custom set receive_money_date = CURRENT_DATE() and receive_money=0 where no = ? and MONTH(CURRENT_DATE()) != MONTH(receive_money_date) and YEAR(CURRENT_DATE()) != YEAR(receive_money_date)"; 
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, list.get(i));
+			 pstmt.executeUpdate();
+			
+		 
+			}
+			String sql = 
+			"update custom set receive_money_date = CURRENT_DATE() and receive_money=receive_money+(200*tv_count) where MONTH(CURRENT_DATE()) != MONTH(receive_money_date) and YEAR(CURRENT_DATE()) != YEAR(receive_money_date)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error :" + e);
+			return false;
+		} finally {
+			// 자원 정리
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return true;
+		
 	}
 }

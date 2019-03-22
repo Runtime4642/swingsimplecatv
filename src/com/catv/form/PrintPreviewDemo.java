@@ -58,11 +58,14 @@ class PrintPreviewDemo extends JFrame implements ActionListener {
 		StringBuilder builder = new StringBuilder();
 		//builder.append("<h1>Header</h1><table width=\"100%\">");
 		for(int i=0;i<list.size();i++) {
-			//금액 계산
-			// 밀린달수 x 200 x tv수       밀린달수 = 현재달-1 - 마지막 낸달 +1
-			int month = (Integer.parseInt(date.substring(0,4))-Integer.parseInt(list.get(i).getLast_collect_date().substring(0,4)))*12 +(Integer.parseInt(date.substring(5))-Integer.parseInt(list.get(i).getLast_collect_date().substring(5)));
-			month++;
-			int price = month * 200 * list.get(i).getTv_count() + month * list.get(i).getMouth_price();
+//			//금액 계산
+//			// 밀린달수 x 200 x tv수       밀린달수 = 현재달-1 - 마지막 낸달 +1
+//			int month = (Integer.parseInt(date.substring(0,4))-Integer.parseInt(list.get(i).getLast_collect_date().substring(0,4)))*12 +(Integer.parseInt(date.substring(5))-Integer.parseInt(list.get(i).getLast_collect_date().substring(5)));
+//			month++;
+//			int price = month * 200 * list.get(i).getTv_count() + month * list.get(i).getMouth_price();
+
+			// 위는 아님 미수금 + 이번달 요금 으로 해야함
+			int price = list.get(i).getRecevice_money() + list.get(i).getMouth_price();
 			//부가세
 			int price2 = price+price/10;
 		builder.append("<table width=\"100%\" style=\"border-collapse:separate;border-spacing:0 0;font-size:10px;width=\"100%\";\">");

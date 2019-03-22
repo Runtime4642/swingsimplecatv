@@ -78,7 +78,9 @@ public class CustomInsert extends JFrame implements ActionListener {
 		// 신규 panel
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
-		panel1.setBorder(new TitledBorder("신규"));
+		TitledBorder title = new TitledBorder("신규");
+		title.setTitleFont(font);
+		panel1.setBorder(title);
 		// 신규 1층 panel
 		JPanel panel1_1 = new JPanel(new FlowLayout());
 		// 이름 panel
@@ -264,9 +266,13 @@ public class CustomInsert extends JFrame implements ActionListener {
 
 		// 작업 panel
 		JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 20));
-		panel2.setBorder(new TitledBorder("작업"));
+		TitledBorder title2 = new TitledBorder("작업");
+		title2.setTitleFont(font);
+		panel2.setBorder(title2);
 		saveButton = new JButton("저장");
+		saveButton.setFont(font);
 		cancleButton = new JButton("취소");
+		cancleButton.setFont(font);
 		saveButton.addActionListener(this);
 		cancleButton.addActionListener(this);
 		panel2.add(saveButton);

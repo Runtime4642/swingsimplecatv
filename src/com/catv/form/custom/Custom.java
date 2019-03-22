@@ -1,6 +1,7 @@
 package com.catv.form.custom;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -34,6 +35,7 @@ public class Custom extends JFrame implements ActionListener {
 	public Custom() {
 
 		setSize(600, 600);
+		setTitle("고객관리메인화면");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JPanel panel = new JPanel(new FlowLayout());
 		신규고객추가버튼 = new JButton("신규고객추가");
@@ -41,9 +43,14 @@ public class Custom extends JFrame implements ActionListener {
 		고객해지버튼 = new JButton("고객해지");
 		기타등록버튼 = new JButton("기타등록");
 		데이터등록버튼 = new JButton("데이터등록");
+		Font font = new Font("arian", Font.BOLD, 30);
+		신규고객추가버튼.setFont(font);
+		고객정보수정버튼.setFont(font);
+		고객해지버튼.setFont(font);
+		기타등록버튼.setFont(font);
+		데이터등록버튼.setFont(font);
 		panel.add(신규고객추가버튼);
 		panel.add(고객정보수정버튼);
-		panel.add(고객해지버튼);
 		// 아직 추가 안했음panel.add(기타등록버튼);
 		panel.add(데이터등록버튼);
 		getContentPane().add(panel);

@@ -36,4 +36,12 @@ public class CustomController {
 	public List<CustomDto> getReceiptPrint() {
 		return dao.getReceiptPrint();
 	}
+	
+	public List<CustomVo> getAutoPrint() {
+		return dao.getAutoList();
+	}
+	
+	public boolean Renew(List<Integer> list) {
+		return dao.updateRenew(list);
+	}
 }
