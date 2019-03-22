@@ -1,8 +1,3 @@
-insert into area values(12,"하동군 화개면 삼신리",667820);
-insert into area values(13,"하동군 화개면 운수리",667820);
-insert into area values(14,"하동군 화개면 용강리",667820);
-insert into area values(15,"하동군 화개면 덕은리",667820);
-insert into area values(16,"하동군 화개면 부춘리",667820);
 insert into area values(17,"하동군 화개면 범왕리",667820);
 insert into area values(18,"하동군 화개면 대성리",667820);
 insert into area values(20,"기타",667820);
@@ -29,3 +24,14 @@ select no,name,phone1,phone2,address,account_name,account_num,receive_money,last
 
 select * from custom where name="강 지산";
 select * from custom;
+
+select a.no,a.name,a.month_price,a.tv_count,a.last_collect_day,a.receive_money,a.account_num from custom a,collectmoneymethod b where a.collect_money_method_no=b.no and b.name='자동이체';
+
+delete from custom where no=2082;
+delete from custom where no=669;
+delete from custom where no=2030;
+
+update custom set receive_money_date = CURRENT_DATE() and receive_money=0 where no = 2 and MONTH(CURRENT_DATE()) != MONTH(receive_money_date) and YEAR(CURRENT_DATE()) != YEAR(receive_money_date);
+
+
+update custom set receive_money_date = CURRENT_DATE() and receive_money=receive_money+(200*tv_count) where MONTH(CURRENT_DATE()) != MONTH(receive_money_date) and YEAR(CURRENT_DATE()) != YEAR(receive_money_date);
