@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.standard.MediaSizeName;
+import javax.print.attribute.standard.MediaPrintableArea;
 import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -69,7 +69,6 @@ class PrintPreviewDemo extends JFrame implements ActionListener {
 			//부가세
 			int price2 = price+price/10;
 			//border-collapse:separate;border-spacing:0 10px
-			builder.append("<br/>");
 			builder.append("<table style='height:100%;border-collapse:separate;border-spacing:0 10px;font-size:\"10px\";margin-top:0px; margin-bottom:0px;'>");
 			builder.append("<tr style='height:1px'>"
 					+ "<td style='padding-left:63px;text-align:center;height:1px;padding-bottom:0px;weight:39%;'>"+list.get(i).getNo()+"</td>"
@@ -106,12 +105,8 @@ class PrintPreviewDemo extends JFrame implements ActionListener {
 					+ "</tr>"
 					);
 		builder.append("</table>");
-		builder.append("<br/>");
-		builder.append("<br/>");
-		builder.append("<br/>");
-		builder.append("<br/>");
-		builder.append("<br/>");
-		builder.append("<br/>");
+		
+		
 		
 	
 		}
@@ -135,18 +130,19 @@ class PrintPreviewDemo extends JFrame implements ActionListener {
 		
 		HashPrintRequestAttributeSet set = new HashPrintRequestAttributeSet();
 		
-		set.add(MediaSizeName.ISO_A4);
-		
+		//set.add(MediaSizeName.ISO_A4);
+		set.add(new MediaPrintableArea(0, 0, 210, 101, MediaPrintableArea.MM));
 		
 		//set.add(new MediaPrintableArea(6, 6, 6, 6, MediaPrintableArea.MM));
 		set.add(OrientationRequested.PORTRAIT);
 		PageFormat pf = PrinterJob.getPrinterJob().getPageFormat(set);
 		//페이지 크기설정
 		Paper paper = new Paper();
-		paper.setSize(600,286.3367003367003); //263.19 ,285.83 286.3367003367003
+		paper.setSize(600,286.3367003367003); //600,286.3367003367003
+		//263.19 ,285.83 286.3367003367003
 		
 		//여백설정  //왼쪽, 위 , 인쇄영역 넓이 , 인쇄영역 높이 // 10 = 0.3cm
-		paper.setImageableArea(30,0,paper.getWidth()-10*2,paper.getHeight());
+		paper.setImageableArea(30,8,paper.getWidth()-10*2,paper.getHeight()/2+10);
 		pf.setPaper(paper);
         //PageFormat can be also prompted from user with PrinterJob.pageDialog()
 		final PrintPreview preview = new PrintPreview(mTextPane.getPrintable(null, null), pf);
