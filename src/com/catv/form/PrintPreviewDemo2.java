@@ -49,24 +49,22 @@ class PrintPreviewDemo2 extends JFrame implements ActionListener {
 				+"<br/>"
 				+ "<table width=\"100%\" style=\"border-collapse:separate;border-spacing:0 0;font-size:10px;width=\"100%\";\">");
 			builder.append(
-					"<tr>"
-							+	"<td style='padding-left:230px'>"+list.get(i).getName()+" 귀하</td>"
+					"<tr >"
+					+	"<td style='padding-left:150px'>"+list.get(i).getAddress()+"</td>"
 					+ "</tr>"	
-					+"<tr >"
-					+"</tr>"
-					+"<tr >"
-					+	"<td style='padding-left:50px'>"+list.get(i).getAddress()+"</td>"
-					+ "</tr>"
 					+"<tr >"
 					+"</tr>"
 					+"<tr>"
 					+	"<td style='padding-left:250px'>"+Integer.toString(list.get(i).getPost_num()).substring(0,3)
 					+"-"+Integer.toString(list.get(i).getPost_num()).substring(3)+"</td>"
 					+ "</tr>"
+					+"<tr >"
+					+"</tr>"
+					+"<tr>"
+					+	"<td style='padding-left:230px'>"+list.get(i).getName()+" 귀하</td>"
+					+ "</tr>"	
 					);
 		builder.append("</table>");
-		builder.append("<br/>");
-		builder.append("<br/>");
 		}
 		
 		mTextPane.setText(builder.toString());
@@ -96,7 +94,10 @@ class PrintPreviewDemo2 extends JFrame implements ActionListener {
 		PageFormat pf = PrinterJob.getPrinterJob().getPageFormat(set);
 		//페이지 크기설정 maybe 11.8 곱해줫음
 		Paper paper = new Paper();
-		paper.setSize(449.97,283);
+	//   paper.setSize(595, 842); //A4 용지 설정 mm * 2.83 is scaling factor to convert mm to pixels
+		
+		//a25.47
+		paper.setSize(449.97,257.53);
 		
 		//여백설정  //왼쪽, 위 , 인쇄영역 넓이 , 인쇄영역 높이
 		paper.setImageableArea(10,10,paper.getWidth()-10*2,paper.getHeight()-20*2);

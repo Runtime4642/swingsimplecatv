@@ -31,8 +31,8 @@ class PrintPreviewDemo3 extends JFrame implements ActionListener {
 	private JTextPane mTextPane;
 	private CustomController customController = new CustomController();
 	
-	public PrintPreviewDemo3(){
-		List <CustomVo> list = customController.getAutoPrint();
+	public PrintPreviewDemo3(String string){
+		List <CustomVo> list = customController.getAutoPrint(string);
 		setTitle("Printer preview demo");
 		setSize(600, 600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,7 +54,7 @@ class PrintPreviewDemo3 extends JFrame implements ActionListener {
 		StringBuilder builder = new StringBuilder();
 		builder.append("<h1 style='text-align:center'>&lt; 고 객 리 스 트 (자동이체)&gt;</h1>");
 		builder.append("<h4 style='text-align:left'>인쇄일 : "+date+"</h4><hr>");
-		builder.append("<table  width='100%'style=\"border-collapse:separate;border-spacing:0 0;font-size:12px;\">");
+		builder.append("<table  width='100%'style=\"border-collapse:separate;border-spacing:0 0;font-size:8px;\">");
 		builder.append("<tr  width='100%' style='border-bottom:1px solid black;'><td >고객No</td><td>성명</td><td>관리비</td><td>TV수</td><td>최종납입</td><td>미수금</td><td>계좌번호</td></tr>");
 		for(int i=0;i<list.size();i++) {
 			builder.append(
@@ -112,7 +112,7 @@ class PrintPreviewDemo3 extends JFrame implements ActionListener {
 		PageFormat pf = PrinterJob.getPrinterJob().getPageFormat(set);
 		//   paper.setSize(595, 842); //A4 용지 설정 mm * 2.83 is scaling factor to convert mm to pixels
 		Paper paper = new Paper();
-		paper.setSize(682.03,792.4);
+		paper.setSize(616.94,786.74);
 		
 		//여백설정  //왼쪽, 위 , 인쇄영역 넓이 , 인쇄영역 높이
 		paper.setImageableArea(10,10,paper.getWidth()-10*2,paper.getHeight()-20*2);

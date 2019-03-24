@@ -17,7 +17,7 @@ public class Dao {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//2 연결
-			String url = "jdbc:mysql://localhost:3306/catv?useSSL=false";
+			String url = "jdbc:mysql://localhost:3306/catv?useSSL=false&serverTimezone=UTC";
 			 con = DriverManager.getConnection(url, "root", "123420");
 		}
 		catch (ClassNotFoundException e) {

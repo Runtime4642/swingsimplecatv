@@ -37,8 +37,8 @@ public class CustomController {
 		return dao.getReceiptPrint();
 	}
 	
-	public List<CustomVo> getAutoPrint() {
-		return dao.getAutoList();
+	public List<CustomVo> getAutoPrint(String string) {
+		return dao.getAutoList(string);
 	}
 	
 	public boolean Renew(List<Integer> list) {

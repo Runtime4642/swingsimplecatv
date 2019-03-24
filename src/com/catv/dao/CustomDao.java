@@ -625,7 +625,7 @@ public class CustomDao extends Dao {
 
 	
 	//자동이체 리스트겟
-	public List<CustomVo> getAutoList(){
+	public List<CustomVo> getAutoList(String string){
 		List<CustomVo> list = new ArrayList<CustomVo>();
 
 		Connection conn = null;
@@ -633,8 +633,9 @@ public class CustomDao extends Dao {
 		ResultSet rs = null;
 		try {
 			conn = getConnection();
-			String sql = "select a.no,a.name,a.month_price,a.tv_count,a.last_collect_day,a.receive_money,a.account_num from custom a,collectmoneymethod b where a.collect_money_method_no=b.no and b.name='자동이체'; ";
+			String sql = "select a.no,a.name,a.month_price,a.tv_count,a.last_collect_day,a.receive_money,a.account_num from custom a,collectmoneymethod b,state c,bank d where a.bank_no=d.no and a.collect_money_method_no=b.no and b.name='자동이체' and a.state_no=c.no AND receive_money != 0  and c.name='정상' and d.name = ?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, string);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 			
@@ -696,7 +697,7 @@ public class CustomDao extends Dao {
 		 
 			}
 			String sql = 
-			"update custom set receive_money_date = CURRENT_DATE() and receive_money=receive_money+(200*tv_count) where MONTH(CURRENT_DATE()) != MONTH(receive_money_date) and YEAR(CURRENT_DATE()) != YEAR(receive_money_date)";
+			"update custom set receive_money_date = CURRENT_DATE() and receive_money=receive_money+(200*tv_count) where MONTH(CURRENT_DATE()) != MONTH(receive_money_date) and YEAR(CURRENT_DATE()) != YEAR(receive_money_date) and state_no = 1";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.executeUpdate();
 			
