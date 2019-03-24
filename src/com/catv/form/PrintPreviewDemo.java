@@ -68,44 +68,52 @@ class PrintPreviewDemo extends JFrame implements ActionListener {
 			int price = list.get(i).getRecevice_money() + list.get(i).getMouth_price();
 			//부가세
 			int price2 = price+price/10;
-		builder.append("<table width=\"100%\" style=\"border-collapse:separate;border-spacing:0 0;font-size:10px;width=\"100%\";\">");
-			builder.append("<tr>"
-					+ "<td style='width:\"35%\";text-align:center;'>"+list.get(i).getNo()+"</td>"
-					+ "<td style='width:\"35%\";text-align:center;'>"+list.get(i).getNo()+"</td>"
-					+ "<td style='width:\"35%\";text-align:center;'>"+list.get(i).getNo()+"</td>"
+			//border-collapse:separate;border-spacing:0 10px
+			builder.append("<br/>");
+			builder.append("<table style='height:100%;border-collapse:separate;border-spacing:0 10px;font-size:\"10px\";margin-top:0px; margin-bottom:0px;'>");
+			builder.append("<tr style='height:1px'>"
+					+ "<td style='padding-left:63px;text-align:center;height:1px;padding-bottom:0px;weight:39%;'>"+list.get(i).getNo()+"</td>"
+					+ "<td style='padding-left:49px;text-align:center;height:1px;padding-bottom:0px;weight:39%;'>"+list.get(i).getNo()+"</td>"
+					+ "<td style='padding-left:40px;text-align:center;height:1px;padding-bottom:0px;weight:32%;'>"+list.get(i).getNo()+"</td>"
 					+ "</tr>"
 					+"<tr>"
-					+ "<td style='width:\"35%\";text-align:center;'>"+list.get(i).getName()+"</td>"
-					+ "<td style='width:\"35%\";text-align:center;'>"+list.get(i).getName()+"</td>"
-					+ "<td style='width:\"35%\";text-align:center;'>"+list.get(i).getName()+"</td>"
+					+ "<td style='padding-left:63px; text-align:center; padding-top:0px;padding-bottom:0px;weight:39%;'>"+list.get(i).getName()+"</td>"
+					+ "<td style='padding-left:49px; text-align:center; padding-top:0px;padding-bottom:0px;weight:39%;'>"+list.get(i).getName()+"</td>"
+					+ "<td style='padding-left:40px; text-align:center; padding-top:0px;padding-bottom:0px;weight:32%;'>"+list.get(i).getName()+"</td>"
 					+ "</tr>"
 					+"<tr>"
-					+"<td colspan='3' style='text-align:left; padding-left:40px'>"+list.get(i).getAddress()+"</td>"
+					+"<td colspan='3' style='padding-left:90px;text-align:left;height:1px;padding-top:0px;padding-bottom:0px;weight:100%;'>"+list.get(i).getAddress()+"</td>"
 					+ "</tr>"
 					+"<tr>"
-					+ "<td style='width:\"35%\";text-align:center; padding-left:\"15px\";'>"+list.get(i).getMouth_price()+" &nbsp &nbsp &nbsp &nbsp &nbsp "+list.get(i).getTv_count()+"</td>"
-					+ "<td style='width:\"35%\";text-align:center;'>"+date.substring(0,4)+" &nbsp "+date.substring(4)+" &nbsp 01</td>"
-					+ "<td style='width:\"35%\";text-align:center; padding-left:\"15px\";'>"+list.get(i).getMouth_price()+" &nbsp &nbsp &nbsp &nbsp &nbsp "+list.get(i).getTv_count()+"</td>"
+					+ "<td style=' text-align:center; padding-left:\"73px\"; padding-top:0px;padding-bottom:0px;weight:39%;'>"+list.get(i).getMouth_price()+" &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp "+list.get(i).getTv_count()+"</td>"
+					+ "<td style='padding-left:44px; text-align:center;height:1px;padding-right:7px;padding-top:0px;padding-bottom:0px;weight:39%;'>"+date.substring(0,4)+" &nbsp &nbsp "+date.substring(5)+" &nbsp &nbsp 01</td>"
+					+ "<td style='padding-left:40px; text-align:center; padding-left:\"51px\";height:1px;padding-top:0px;padding-bottom:0px;weight:32%;'>"+list.get(i).getMouth_price()+" &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp "+list.get(i).getTv_count()+"</td>"
 					+ "</tr>"
 					+"<tr>"
-					+ "<td style='width:\"35%\";text-align:center;'>"+list.get(i).getLast_collect_date()+"-"+date+"</td>"
-					+ "<td style='width:\"35%\";text-align:center;'>"+date.substring(0,4)+" &nbsp "+date.substring(4)+" &nbsp 31</td>"
-					+ "<td style='width:\"35%\";text-align:center;'>"+list.get(i).getLast_collect_date()+"-"+date+"</td>"
+					+ "<td style=' padding-left:50px;text-align:center;height:1px;padding-right:10px;padding-top:0px;padding-bottom:0px;weight:39%;'>"+list.get(i).getLast_collect_date()+"-"+date+"</td>"
+					+ "<td style='padding-left:39px;' text-align:center;height:1px;padding-left:3px;padding-top:0px;padding-bottom:0px;weight:39%;'>"+date.substring(0,4)+" &nbsp &nbsp "+date.substring(5)+" &nbsp &nbsp 31</td>"
+					+ "<td style=padding-left:30px;' text-align:center;height:1px;padding-left:0px;padding-top:0px;padding-bottom:0px;weight:32%;'>"+list.get(i).getLast_collect_date()+"-"+date+"</td>"
 					+ "</tr>"
 					+"<tr>"
-					+ "<td style='width:\"35%\";text-align:center; padding-left:\"20px\";'>"+price+" &nbsp &nbsp &nbsp &nbsp &nbsp "+price/10+"</td>"
-					+ "<td style='width:\"35%\";text-align:center; padding-left:\"20px\";'>"+price+" &nbsp &nbsp &nbsp &nbsp &nbsp "+price/10+"</td>"
-					+ "<td style='width:\"35%\";text-align:center; padding-left:\"20px\";'>"+price+" &nbsp &nbsp &nbsp &nbsp &nbsp "+price/10+"</td>"
+					+ "<td style='text-align:center; padding-left:\"55px\";height:1px;padding-top:0px;padding-bottom:0px;weight:39%;'>"+price+" &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp "+price/10+"</td>"
+					+ "<td style='padding-left:30px; text-align:center;height:1px;padding-top:0px;padding-bottom:0px;weight:39%;'>"+price+" &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp "+price/10+"</td>"
+					+ "<td style=' text-align:center; padding-left:\"20px\";height:1px;padding-top:0px;padding-bottom:0px;weight:32%;'>"+price+" &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp "+price/10+"</td>"
 					+ "</tr>"
 					+"<tr>"
-					+ "<td style='width:\"35%\";text-align:center; padding-left:\"20px\";'>"+price2+" &nbsp &nbsp &nbsp &nbsp &nbsp "+(price2+list.get(i).getTv_count()*200)+"</td>"
-					+ "<td style='width:\"35%\";text-align:center; padding-left:\"20px\";'>"+price2+" &nbsp &nbsp &nbsp &nbsp &nbsp "+(price2+list.get(i).getTv_count()*200)+"</td>"
-					+ "<td style='width:\"35%\";text-align:center; padding-left:\"20px\";'>"+price2+" &nbsp &nbsp &nbsp &nbsp &nbsp "+(price2+list.get(i).getTv_count()*200)+"</td>"
+					+ "<td style=' text-align:center; padding-left:\"55px\";height:1px;padding-top:0px;padding-bottom:0px;weight:39%;'>"+price2+" &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp "+(price2+list.get(i).getTv_count()*200)+"</td>"
+					+ "<td style='padding-left:30px; text-align:center; height:1px;padding-top:0px;padding-bottom:0px;weight:39%;'>"+price2+" &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp "+(price2+list.get(i).getTv_count()*200)+"</td>"
+					+ "<td style=' text-align:center; padding-left:\"20px\";height:1px;padding-top:0px;padding-bottom:0px;weight:32%;'>"+price2+" &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp "+(price2+list.get(i).getTv_count()*200)+"</td>"
 					+ "</tr>"
 					);
 		builder.append("</table>");
 		builder.append("<br/>");
 		builder.append("<br/>");
+		builder.append("<br/>");
+		builder.append("<br/>");
+		builder.append("<br/>");
+		builder.append("<br/>");
+		
+	
 		}
 		
 		mTextPane.setText(builder.toString());
@@ -135,10 +143,10 @@ class PrintPreviewDemo extends JFrame implements ActionListener {
 		PageFormat pf = PrinterJob.getPrinterJob().getPageFormat(set);
 		//페이지 크기설정
 		Paper paper = new Paper();
-		paper.setSize(449.97,257.53);
+		paper.setSize(600,286.3367003367003); //263.19 ,285.83 286.3367003367003
 		
-		//여백설정  //왼쪽, 위 , 인쇄영역 넓이 , 인쇄영역 높이
-		paper.setImageableArea(10,10,paper.getWidth()-10*2,paper.getHeight()-20*2);
+		//여백설정  //왼쪽, 위 , 인쇄영역 넓이 , 인쇄영역 높이 // 10 = 0.3cm
+		paper.setImageableArea(30,0,paper.getWidth()-10*2,paper.getHeight());
 		pf.setPaper(paper);
         //PageFormat can be also prompted from user with PrinterJob.pageDialog()
 		final PrintPreview preview = new PrintPreview(mTextPane.getPrintable(null, null), pf);

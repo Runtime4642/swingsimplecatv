@@ -97,7 +97,7 @@ class PrintPreviewDemo2 extends JFrame implements ActionListener {
 	//   paper.setSize(595, 842); //A4 용지 설정 mm * 2.83 is scaling factor to convert mm to pixels
 		
 		//a25.47
-		paper.setSize(449.97,257.53);
+		paper.setSize(449.97,285.83);
 		
 		//여백설정  //왼쪽, 위 , 인쇄영역 넓이 , 인쇄영역 높이
 		paper.setImageableArea(10,10,paper.getWidth()-10*2,paper.getHeight()-20*2);

@@ -54,30 +54,30 @@ class PrintPreviewDemo3 extends JFrame implements ActionListener {
 		StringBuilder builder = new StringBuilder();
 		builder.append("<h1 style='text-align:center'>&lt; 고 객 리 스 트 (자동이체)&gt;</h1>");
 		builder.append("<h4 style='text-align:left'>인쇄일 : "+date+"</h4><hr>");
-		builder.append("<table  width='100%'style=\"border-collapse:separate;border-spacing:0 0;font-size:8px;\">");
+		builder.append("<table  width='100%'style=\"margin-top:40px;border-collapse:separate;border-spacing:0 0;font-size:10px;\">");
 		builder.append("<tr  width='100%' style='border-bottom:1px solid black;'><td >고객No</td><td>성명</td><td>관리비</td><td>TV수</td><td>최종납입</td><td>미수금</td><td>계좌번호</td></tr>");
 		for(int i=0;i<list.size();i++) {
 			builder.append(
 					"<tr width='100%' style='border-bottom:1px solid black'>"
-					+"<td>"
+					+"<td width='10%'>"
 					+ list.get(i).getNo()		
 					+"</td>"
-					+"<td>"
+					+"<td width='20%'>"
 					+ list.get(i).getName()		
 					+"</td>"
-					+"<td>"
+					+"<td width='10%'>"
 					+ list.get(i).getMouth_price()		
 					+"</td>"
-					+"<td>"
+					+"<td width='10%'>"
 					+ list.get(i).getTv_count()		
 					+"</td>"
-					+"<td>"
+					+"<td width='10%'>"
 					+ list.get(i).getLast_collect_date()		
 					+"</td>"
-					+"<td>"
+					+"<td width='10%'>"
 					+ list.get(i).getReceive_money()		
 					+"</td>"
-					+"<td>"
+					+"<td width='30%'>"
 					+ list.get(i).getAccount_num()		
 					+"</td>"
 					+"</tr>"
